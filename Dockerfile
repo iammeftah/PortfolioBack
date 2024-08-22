@@ -1,14 +1,11 @@
-# Use a base image with Java
-FROM openjdk:17-jdk-slim
-
-# Set the working directory
+FROM maven:3.8.4-openjdk-17-slim AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the JAR file to the container
-COPY target/PortfolioBack-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose the port your app will run on
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/PortfolioBack-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]
