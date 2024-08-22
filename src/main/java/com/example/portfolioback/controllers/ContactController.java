@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/contact")
-@CrossOrigin(origins = "https://portfolio-front-x384-ojncihx3p.vercel.app/") // Adjust this to match your frontend URL
+@CrossOrigin(origins = "https://portfolio-front-x384-ojncihx3p.vercel.app") // Adjust this to match your frontend URL
 public class ContactController {
     private final ContactRepository contactRepository;
 
